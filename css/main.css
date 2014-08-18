@@ -1,3 +1,6 @@
+:root{
+	font-family: calibri;
+}
 
 html, body {height: 100%;}
 
@@ -9,15 +12,7 @@ body{
 
 #main{
 	overflow: auto;
-	padding-bottom: 150px; /* must be same height as footer */
-}
-
-#footer {
-	background-color: #DBC0CF;
-	position: relative;
-	margin-top: -150px; /* negative value of footer height */
-	height: 150px;
-	clear: both;
+	padding-bottom: 50px; /* must be same height as footer */
 }
 
 #header{
@@ -31,7 +26,9 @@ body{
 	margin-right: auto;
 	margin-left: auto;
 	margin-top: 10px;
+	margin-bottom: 10px;
 	width: 90%;
+	min-height: 300px;
 	overflow: auto;
 }
 
@@ -39,4 +36,20 @@ body{
 	background-color: #FF9966;
 	float: left;
 	margin: 10px;
+}
+
+#footer {
+	background-color: #DBC0CF;
+	position: relative;
+	margin-top: -50px; /* negative value of footer height */
+	height: 50px;
+	clear: both;
+	vertical-align: middle;
+	text-align: center;
+}
+
+#author-msg {
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
 }
