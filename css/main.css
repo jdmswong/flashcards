@@ -1,5 +1,23 @@
+
+html, body {height: 100%;}
+
 body{
 	background-color: #9DBCEB;
+}
+
+#wrap {min-height: 100%;}
+
+#main{
+	overflow: auto;
+	padding-bottom: 150px; /* must be same height as footer */
+}
+
+#footer {
+	background-color: #DBC0CF;
+	position: relative;
+	margin-top: -150px; /* negative value of footer height */
+	height: 150px;
+	clear: both;
 }
 
 #header{
