@@ -32,10 +32,41 @@ body{
 	overflow: auto;
 }
 
+#game-area{
+	background-color: #66FF99;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	height: 500px;
+	width: 600px;
+	text-align: center;
+	overflow: auto;
+}
+
 #title{
 	background-color: #FF9966;
-	float: left;
-	margin: 10px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 14pt;
+}
+
+#counter {
+	background-color: #FF9966;
+	margin-bottom: 10px;
+}
+
+#flashcard {
+	background-color: #ADADAD;
+	margin-left: auto;
+	margin-right:auto;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	height: 250px;
+	width: 500px;
+	
 }
 
 #footer {
