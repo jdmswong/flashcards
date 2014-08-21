@@ -8,17 +8,37 @@ $(document).ready(function(){
 	
 	var cardFrame = {
 		currentCard: flashCards[0],
-		element: $("#flashcard"),
+		element: "asdf",//$("#flashcard p"),
+		state: "unflipped", // flipped or unflipped
+		initialize: function(){
+			
+			this.showFront();
+			
+			
+		},
+		
 		showFront: function(){
-			$("#flashcard").text( this.currentCard.front );
-		}
+			console.log("showfront: "+this.element);
+			//this.element.text( this.currentCard.front );
+		},
+		
+		flip: function(){
+			console.log("flip: "+this.element);
+			//this.element.text( this.currentCard.back );
+		},
 	};
 	
 	// Initializes board
 	(function initialize(){ 
 		refreshCounter(1);
 		
-		cardFrame.showFront();
+		cardFrame.initialize();
+			$("#flashcard").bind( "click", function(){alert(this.element);} );
+		
+		// Debug menu
+		$("#debug button").bind( "click", function(){
+			cardFrame.flip();
+		} );
 	})();
 	
 	// Sets counter to "x of <total>"

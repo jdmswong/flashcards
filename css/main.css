@@ -8,6 +8,17 @@ body{
 	background-color: #9DBCEB;
 }
 
+#debug {
+	background-color: #000000;
+	position: absolute;
+	width: 100px;
+	height: 100px;
+	left: 0px;
+	top: 100px;
+	color: #FFFFFF;
+	padding: 10px;
+}
+
 #wrap {min-height: 100%;}
 
 #main{
@@ -64,9 +75,17 @@ body{
 	margin-right:auto;
 	margin-top: 15px;
 	margin-bottom: 15px;
+	padding: 10px;
 	height: 250px;
 	width: 500px;
-	
+	vertical-align: middle;
+}
+
+#flashcard p {
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	font-size: 14pt;
 }
 
 #footer {
