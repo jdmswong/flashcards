@@ -8,7 +8,7 @@ $(document).ready(function(){
 	
 	var cardFrame = {
 		currentCard: flashCards[0],
-		element: "asdf",//$("#flashcard p"),
+		element: $("#flashcard p"),
 		state: "unflipped", // flipped or unflipped
 		initialize: function(){
 			
@@ -18,13 +18,17 @@ $(document).ready(function(){
 		},
 		
 		showFront: function(){
-			console.log("showfront: "+this.element);
-			//this.element.text( this.currentCard.front );
+			this.element.text( this.currentCard.front );
 		},
 		
 		flip: function(){
-			console.log("flip: "+this.element);
-			//this.element.text( this.currentCard.back );
+			if( this.state == "unflipped" ){
+				this.element.text( this.currentCard.back );
+				this.state = "flipped";
+			}else{
+				this.element.text( this.currentCard.front );
+				this.state = "unflipped";
+			}
 		},
 	};
 	
@@ -33,7 +37,9 @@ $(document).ready(function(){
 		refreshCounter(1);
 		
 		cardFrame.initialize();
-			$("#flashcard").bind( "click", function(){alert(this.element);} );
+		$("#flashcard").bind( "click", function(){cardFrame.flip();} );
+		//$("#flashcard").bind( "click", cardFrame.flip );
+
 		
 		// Debug menu
 		$("#debug button").bind( "click", function(){
