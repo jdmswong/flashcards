@@ -6,17 +6,20 @@ $(document).ready(function(){
 		{front:"dat front",		back:"dat back"}
 	];
 	
-	var deck = flashCards.filter(function(){return true;});  // cards belong in the deck, until they are discarded
+	var deck = [0,1,2];  // cards belong in the deck, until they are discarded
 	var discard = [];
+	var nextDeck = [];
 	
 	var cardFrame = {
-		currentCardIndex: 0,
+		currentCardIndex: null,
 		currentCard: null,
+		deckIndex : 0,
 		element: $("#flashcard p"),
 		state: "unflipped", // flipped or unflipped
 
 		initialize: function(){
-			this.currentCard = deck[this.currentCardIndex];
+			this.currentCardIndex = deck[this.deckIndex];
+			this.currentCard = flashCards[this.currentCardIndex];
 			this.showFront();
 		},
 		
@@ -34,8 +37,10 @@ $(document).ready(function(){
 			}
 		},
 		
-		nextCard: function(){
-			
+		correct: function(){
+			discard.push(deck[this.deckIndex]);
+			this.deckIndex++;
+			this.initialize();
 		}
 	};
 	
@@ -45,14 +50,8 @@ $(document).ready(function(){
 		
 		cardFrame.initialize();
 		$("#flashcard").bind( "click", function(){cardFrame.flip();} );
-		$("#btn-correct").bind( "click", function(){
-			discard.push( deck.shift() );
-			cardFrame.initialize();
-			console.log("correct");
-		} );
-		$("#btn-incorrect").bind( "click", function(){
-			
-		} );
+		$("#btn-correct").bind( "click", function(){cardFrame.correct();} );
+		$("#btn-incorrect").bind( "click", function(){cardFrame.incorrect();} );
 		$("#btn-skip").bind( "click", function(){} );
 
 		
