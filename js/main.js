@@ -6,15 +6,18 @@ $(document).ready(function(){
 		{front:"dat front",		back:"dat back"}
 	];
 	
+	var deck = flashCards.filter(function(){return true;});  // cards belong in the deck, until they are discarded
+	var discard = [];
+	
 	var cardFrame = {
-		currentCard: flashCards[0],
+		currentCardIndex: 0,
+		currentCard: null,
 		element: $("#flashcard p"),
 		state: "unflipped", // flipped or unflipped
+
 		initialize: function(){
-			
+			this.currentCard = deck[this.currentCardIndex];
 			this.showFront();
-			
-			
 		},
 		
 		showFront: function(){
@@ -30,6 +33,10 @@ $(document).ready(function(){
 				this.state = "unflipped";
 			}
 		},
+		
+		nextCard: function(){
+			
+		}
 	};
 	
 	// Initializes board
@@ -38,7 +45,15 @@ $(document).ready(function(){
 		
 		cardFrame.initialize();
 		$("#flashcard").bind( "click", function(){cardFrame.flip();} );
-		//$("#flashcard").bind( "click", cardFrame.flip );
+		$("#btn-correct").bind( "click", function(){
+			discard.push( deck.shift() );
+			cardFrame.initialize();
+			console.log("correct");
+		} );
+		$("#btn-incorrect").bind( "click", function(){
+			
+		} );
+		$("#btn-skip").bind( "click", function(){} );
 
 		
 		// Debug menu
