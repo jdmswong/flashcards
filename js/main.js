@@ -40,8 +40,29 @@ $(document).ready(function(){
 		correct: function(){
 			discard.push(deck[this.deckIndex]);
 			this.deckIndex++;
-			this.initialize();
-		}
+			if(this.deckIndex == deck.length){
+				console.log("deck finished");
+				this.deckClosure();
+			}else{
+				this.initialize();
+			}
+		},
+		
+		incorrect: function(){
+			nextDeck.push(deck[this.deckIndex]);
+			this.deckIndex++;
+			if(this.deckIndex == deck.length){
+				console.log("deck finished");
+				this.deckClosure();
+			}else{
+				this.initialize();
+			}
+		},
+		
+		deckClosure: function(){
+			console.log(nextDeck);
+			console.log(discard);
+		},
 	};
 	
 	// Initializes board
@@ -49,14 +70,14 @@ $(document).ready(function(){
 		refreshCounter(1);
 		
 		cardFrame.initialize();
-		$("#flashcard").bind( "click", function(){cardFrame.flip();} );
-		$("#btn-correct").bind( "click", function(){cardFrame.correct();} );
-		$("#btn-incorrect").bind( "click", function(){cardFrame.incorrect();} );
-		$("#btn-skip").bind( "click", function(){} );
+		$("#flashcard").on( "click", function(){cardFrame.flip();} );
+		$("#btn-correct").on( "click", function(){cardFrame.correct();} );
+		$("#btn-incorrect").on( "click", function(){cardFrame.incorrect();} );
+		$("#btn-skip").on( "click", function(){} );
 
 		
 		// Debug menu
-		$("#debug button").bind( "click", function(){
+		$("#debug button").on( "click", function(){
 			cardFrame.flip();
 		} );
 	})();
