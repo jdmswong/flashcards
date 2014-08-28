@@ -59,6 +59,11 @@ $(document).ready(function(){
 			}
 		},
 		
+		skip: function(){
+			deck.push(deck.shift());
+			this.initialize();
+		},
+		
 		deckClosure: function(){
 			console.log(nextDeck);
 			console.log(discard);
@@ -70,10 +75,10 @@ $(document).ready(function(){
 		refreshCounter(1);
 		
 		cardFrame.initialize();
-		$("#flashcard").on( "click", function(){cardFrame.flip();} );
-		$("#btn-correct").on( "click", function(){cardFrame.correct();} );
-		$("#btn-incorrect").on( "click", function(){cardFrame.incorrect();} );
-		$("#btn-skip").on( "click", function(){} );
+		$("#flashcard")		.on( "click", function(){cardFrame.flip();} );
+		$("#btn-correct")	.on( "click", function(){cardFrame.correct();} );
+		$("#btn-incorrect")	.on( "click", function(){cardFrame.incorrect();} );
+		$("#btn-skip")		.on( "click", function(){cardFrame.skip();} );
 
 		
 		// Debug menu
