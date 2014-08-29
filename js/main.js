@@ -3,10 +3,12 @@ $(document).ready(function(){
 	var flashCards = [
 		{front:"1 + 1 = _",		back:"2"},
 		{front:"a,b,c,d,_ ?",	back:"e"},
-		{front:"dat front",		back:"dat back"}
+		{front:"dat front",		back:"dat back"},
+		{front:"front4",		back:"back4"},
+		{front:"front5",		back:"back5"},
 	];
 	
-	var deck = [0,1,2];  // cards belong in the deck, until they are discarded
+	var deck = range(0, flashCards.length-1);  // cards belong in the deck, until they are discarded
 	var discard = [];
 	var nextDeck = [];
 	
@@ -21,6 +23,15 @@ $(document).ready(function(){
 			this.currentCardIndex = deck[this.deckIndex];
 			this.currentCard = flashCards[this.currentCardIndex];
 			this.showFront();
+			
+			console.log("deck:");
+			console.log(deck);
+			console.log("discard:");
+			console.log(discard);
+			console.log("nextDeck");
+			console.log(nextDeck);
+			console.log();
+		
 		},
 		
 		showFront: function(){
@@ -70,6 +81,8 @@ $(document).ready(function(){
 		},
 	};
 	
+	
+	
 	// Initializes board
 	(function initialize(){ 
 		refreshCounter(1);
@@ -92,4 +105,11 @@ $(document).ready(function(){
 		$(" #counter ").text(currentCount + " of " +flashCards.length);
 	}
 	
+	function range(start, end) {
+	    var foo = [];
+	    for (var i = start; i <= end; i++) {
+	        foo.push(i);
+	    }
+	    return foo;
+	}
 });
