@@ -8,6 +8,8 @@ $(document).ready(function(){
 		{front:"front5",		back:"back5"},
 	];
 	
+	var placeHolderCard = {front:"[No cards]", back:"[No cards]"};
+	
 	var deck = range(0, flashCards.length-1);  // cards belong in the deck, until they are discarded
 	var discard = [];
 	var nextDeck = [];
@@ -15,15 +17,10 @@ $(document).ready(function(){
 	var cardFrame = {
 		currentCardIndex: null,
 		currentCard: null,
-		deckIndex : 0,
 		element: $("#flashcard p"),
 		state: "unflipped", // flipped or unflipped
 
 		initialize: function(){
-			this.currentCardIndex = deck[this.deckIndex];
-			this.currentCard = flashCards[this.currentCardIndex];
-			this.showFront();
-			
 			console.log("deck:");
 			console.log(deck);
 			console.log("discard:");
@@ -32,6 +29,15 @@ $(document).ready(function(){
 			console.log(nextDeck);
 			console.log();
 		
+			if(deck.length > 0){
+				this.currentCardIndex = deck[0];
+				this.currentCard = flashCards[this.currentCardIndex];
+			}else{
+				this.currentCardIndex = undefined;
+				this.currentCard = placeHolderCard;
+			}
+			this.showFront();
+			
 		},
 		
 		showFront: function(){
@@ -49,30 +55,31 @@ $(document).ready(function(){
 		},
 		
 		correct: function(){
-			discard.push(deck[this.deckIndex]);
-			this.deckIndex++;
-			if(this.deckIndex == deck.length){
+			if(deck.length == 0){
 				console.log("deck finished");
 				this.deckClosure();
 			}else{
+				discard.push(deck.shift());
 				this.initialize();
 			}
 		},
 		
 		incorrect: function(){
-			nextDeck.push(deck[this.deckIndex]);
-			this.deckIndex++;
-			if(this.deckIndex == deck.length){
+			if(deck.length == 0){
 				console.log("deck finished");
 				this.deckClosure();
 			}else{
+				nextDeck.push(deck.shift());
 				this.initialize();
 			}
 		},
 		
 		skip: function(){
-			deck.push(deck.shift());
-			this.initialize();
+			if(deck.length > 0){
+				deck.push(deck.shift());
+				this.initialize();
+				
+			}
 		},
 		
 		deckClosure: function(){
