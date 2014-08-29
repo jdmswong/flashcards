@@ -21,13 +21,16 @@ $(document).ready(function(){
 		state: "unflipped", // flipped or unflipped
 
 		initialize: function(){
-			console.log("deck:");
-			console.log(deck);
-			console.log("discard:");
-			console.log(discard);
-			console.log("nextDeck");
-			console.log(nextDeck);
-			console.log();
+			
+			if(undefined){
+				console.log("deck:");
+				console.log(deck);
+				console.log("discard:");
+				console.log(discard);
+				console.log("nextDeck");
+				console.log(nextDeck);
+				console.log();
+			}
 		
 			if(deck.length > 0){
 				this.currentCardIndex = deck[0];
@@ -38,6 +41,8 @@ $(document).ready(function(){
 			}
 			this.showFront();
 			
+			refreshCounter();
+		
 		},
 		
 		showFront: function(){
@@ -83,8 +88,10 @@ $(document).ready(function(){
 		},
 		
 		deckClosure: function(){
-			console.log(nextDeck);
+			console.log("discard:");
 			console.log(discard);
+			console.log("nextDeck");
+			console.log(nextDeck);
 		},
 	};
 	
@@ -92,8 +99,6 @@ $(document).ready(function(){
 	
 	// Initializes board
 	(function initialize(){ 
-		refreshCounter(1);
-		
 		cardFrame.initialize();
 		$("#flashcard")		.on( "click", function(){cardFrame.flip();} );
 		$("#btn-correct")	.on( "click", function(){cardFrame.correct();} );
@@ -108,8 +113,8 @@ $(document).ready(function(){
 	})();
 	
 	// Sets counter to "x of <total>"
-	function refreshCounter(currentCount){
-		$(" #counter ").text(currentCount + " of " +flashCards.length);
+	function refreshCounter(){
+		$(" #counter ").text(deck.length + " remaining");
 	}
 	
 	function range(start, end) {
