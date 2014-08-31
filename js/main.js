@@ -13,6 +13,7 @@ $(document).ready(function(){
 	var deck = range(0, flashCards.length-1);  // cards belong in the deck, until they are discarded
 	var discard = [];
 	var nextDeck = [];
+	var roundNum = 1;
 	
 	var cardFrame = {
 		currentCardIndex: null,
@@ -60,22 +61,20 @@ $(document).ready(function(){
 		},
 		
 		correct: function(){
+			discard.push(deck.shift());
+			this.initialize();
 			if(deck.length == 0){
 				console.log("deck finished");
 				this.deckClosure();
-			}else{
-				discard.push(deck.shift());
-				this.initialize();
 			}
 		},
 		
 		incorrect: function(){
+			nextDeck.push(deck.shift());
+			this.initialize();
 			if(deck.length == 0){
 				console.log("deck finished");
 				this.deckClosure();
-			}else{
-				nextDeck.push(deck.shift());
-				this.initialize();
 			}
 		},
 		
@@ -92,6 +91,11 @@ $(document).ready(function(){
 			console.log(discard);
 			console.log("nextDeck");
 			console.log(nextDeck);
+			
+			alert(
+				"Round over! " + discard.length + "/" + ( discard.length + nextDeck.length ) 
+				+ "correct. " + nextDeck.length + " cards moved to next round"
+			);
 		},
 	};
 	
@@ -114,7 +118,7 @@ $(document).ready(function(){
 	
 	// Sets counter to "x of <total>"
 	function refreshCounter(){
-		$(" #counter ").text(deck.length + " remaining");
+		$(" #card-counter ").text(deck.length + " remaining");
 	}
 	
 	function range(start, end) {

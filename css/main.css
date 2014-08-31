@@ -64,9 +64,18 @@ body{
 	font-size: 14pt;
 }
 
-#counter {
+#header-stats {
 	background-color: #FF9966;
 	margin-bottom: 10px;
+}
+
+#round-counter{
+	display: inline-block;
+}
+
+#card-counter{
+	display: inline-block;
+	margin-left: 150px;
 }
 
 #flashcard {
