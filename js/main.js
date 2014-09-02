@@ -43,7 +43,7 @@ $(document).ready(function(){
 			this.showFront();
 			
 			refreshCounter();
-		
+			updateRound();
 		},
 		
 		showFront: function(){
@@ -96,6 +96,8 @@ $(document).ready(function(){
 				"Round over! " + discard.length + "/" + ( discard.length + nextDeck.length ) 
 				+ "correct. " + nextDeck.length + " cards moved to next round"
 			);
+			
+			nextRound();
 		},
 	};
 	
@@ -108,7 +110,7 @@ $(document).ready(function(){
 		$("#btn-correct")	.on( "click", function(){cardFrame.correct();} );
 		$("#btn-incorrect")	.on( "click", function(){cardFrame.incorrect();} );
 		$("#btn-skip")		.on( "click", function(){cardFrame.skip();} );
-
+	
 		
 		// Debug menu
 		$("#debug button").on( "click", function(){
@@ -116,9 +118,26 @@ $(document).ready(function(){
 		} );
 	})();
 	
+	function nextRound(){
+		deck = nextDeck;
+		nextDeck = [];
+		discard = [];
+		incrementRound();
+		cardFrame.initialize();
+	}
+	
 	// Sets counter to "x of <total>"
 	function refreshCounter(){
 		$(" #card-counter ").text(deck.length + " remaining");
+	}
+	
+	function incrementRound(){
+		roundNum++;
+		updateRound();
+	}
+	
+	function updateRound(){
+		$(" #round-counter ").text("Round " + roundNum);
 	}
 	
 	function range(start, end) {
