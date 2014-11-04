@@ -1,0 +1,7 @@
+notes
+
+to solve invalid server index warning from phpmyadmin add $i = 1; to config.inc.php
+to solve login error #2002 change
+  $cfg['Servers'][$i]['host'] = 'localhost';
+to
+  $cfg['Servers'][$i]['host'] = '127.0.0.1';
