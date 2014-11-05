@@ -5,3 +5,5 @@ to solve login error #2002 change
   $cfg['Servers'][$i]['host'] = 'localhost';
 to
   $cfg['Servers'][$i]['host'] = '127.0.0.1';
+
+print_r: prints variables in human readable format
