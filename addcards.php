@@ -35,8 +35,9 @@ try {
     // begin the transaction
     $conn->beginTransaction();
     // SQL statements
+    $stmt = $conn->prepare("INSERT INTO flashcards (userid, front, back) VALUES (1,?,?)");
     foreach( $values as $rr ){
-        $conn->exec("INSERT INTO flashcards (userid, front, back) VALUES (1,'".$rr[0]."','".$rr[1]."')");
+       $stmt->execute(array($rr[0],$rr[1]));
     }
     
     $conn->commit();
