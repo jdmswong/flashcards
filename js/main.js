@@ -8,6 +8,8 @@ $(document).ready(function(){
 		// {front:"front5",		back:"back5"},
 	// ];
 	
+	// flashcards deck pulled from container
+	
 	var placeHolderCard = {front:"[No cards]", back:"[No cards]"};
 	
 	var deck = range(0, flashCards.length-1);  // cards belong in the deck, until they are discarded
@@ -34,6 +36,7 @@ $(document).ready(function(){
 			}
 		
 			if(deck.length > 0){
+			    this.shuffle();
 				this.currentCardIndex = deck[0];
 				this.currentCard = flashCards[this.currentCardIndex];
 			}else{
@@ -99,6 +102,16 @@ $(document).ready(function(){
 			
 			nextRound();
 		},
+		
+		shuffle: function(){
+		    deckClone = deck.slice(0, deck.length);
+		    shuffledDeck = [];
+		    while( shuffledDeck.length < deck.length ){
+		        randomIndex = Math.floor((Math.random() * deckClone.length-1) );
+		        shuffledDeck.push( deckClone.splice(randomIndex,1)[0] );
+		    }
+		    deck = shuffledDeck;
+		}
 	};
 	
 	
