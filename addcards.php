@@ -1,13 +1,13 @@
 <?php
 
-// if(!$_POST['inputFile']){
-    // header("Location: addcards_form.html");
-    // exit;
-// }
+if(!$_POST['inputFile']){
+    header("Location: addcards_form.html");
+    exit;
+}
 
-$inputfile = "flashcardinput.txt";
+$inputfile = $_POST['inputFile'];
 
-$fh = fopen("flashcardinput.txt", "r") or die("Unable to open file!");
+$fh = fopen($inputfile, "r") or die("Unable to open file!");
 
 $values = array();
 while( !feof( $fh) ){
