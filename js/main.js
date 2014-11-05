@@ -1,12 +1,12 @@
 $(document).ready(function(){
 	
-	var flashCards = [
-		{front:"1 + 1 = _",		back:"2"},
-		{front:"a,b,c,d,_ ?",	back:"e"},
-		{front:"dat front",		back:"dat back"},
-		{front:"front4",		back:"back4"},
-		{front:"front5",		back:"back5"},
-	];
+	// var flashCards = [
+		// {front:"1 + 1 = _",		back:"2"},
+		// {front:"a,b,c,d,_ ?",	back:"e"},
+		// {front:"dat front",		back:"dat back"},
+		// {front:"front4",		back:"back4"},
+		// {front:"front5",		back:"back5"},
+	// ];
 	
 	var placeHolderCard = {front:"[No cards]", back:"[No cards]"};
 	

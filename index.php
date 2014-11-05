@@ -10,7 +10,7 @@
 	<script src="js/main.js"></script>
 
     <script>
-        var flashcards = 
+        var flashCards = 
 <?php
 $servername = "127.0.0.1";
 $username   = "jd";
@@ -38,7 +38,7 @@ catch(PDOException $e)
 $conn = null;
     
 ?>;
-        alert(flashcards);
+        
     </script>
 </head>
 
