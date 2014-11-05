@@ -28,6 +28,7 @@ $username   = "jd";
 $password   = "Awesomemysql123";
 $dbname     = "flashcards";
 
+$e=null;
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -49,5 +50,9 @@ catch(PDOException $e)
     }
 $conn = null;
 
+if($e == null){
+    header("Location: viewcards.php?status=added");
+    exit;
+}
 
 ?>
