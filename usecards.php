@@ -51,47 +51,34 @@ $conn = null;
 	</div>
 	-->
 	
-	<div id="wrap">
-		<div id="main">
-		
-			<!--
-			<div id="header">
-				header
-			</div>
-			-->
-			
-			<div id="content">
-				<div id="game-area">
-					<div id="title">Flashcards</div>
-					
-					<div id="header-stats">
-						<div id="round-counter">Round 0</div>
-						<div id="card-counter">1 of a billion</div>
-					</div>
-					
-					<div id="flashcard"><p>SOME TEXT</p></div>
-					
-					<div id="control-panel">
-						<div class="inline-wrapper">
-						    <button type="button" id="btn-correct">		Correct!	</button>
-						    <div class="card-counter" id="correct-counter">0</div>
-			            </div>
-						<div class="inline-wrapper">
-						    <button type="button" id="btn-incorrect">	Incorrect!	</button>
-						    <div class="card-counter" id="incorrect-counter">0</div>
-						</div>
-						<button type="button" id="btn-skip">		Skip		</button>
-					</div>
-				</div>
-				
-			</div>
-			
-		</div>
+<?php require("header.php")?>			    
+			    
+			    
+<div id="game-area">
+	<div id="title">Flashcards</div>
+	
+	<div id="header-stats">
+		<div id="round-counter">Round 0</div>
+		<div id="card-counter">1 of a billion</div>
 	</div>
 	
-	<div id="footer">
-		<div id="author-msg">Created by JD Wong.  Contact me via gmail (jdmswong)</div>
+	<div id="flashcard"><p>SOME TEXT</p></div>
+	
+	<div id="control-panel">
+		<div class="inline-wrapper">
+		    <button type="button" id="btn-correct">		Correct!	</button>
+		    <div class="card-counter" id="correct-counter">0</div>
+        </div>
+		<div class="inline-wrapper">
+		    <button type="button" id="btn-incorrect">	Incorrect!	</button>
+		    <div class="card-counter" id="incorrect-counter">0</div>
+		</div>
+		<button type="button" id="btn-skip">		Skip		</button>
 	</div>
+</div>
+				
+				
+<?php require("footer.php");		 ?>		
 	
 </body>
 

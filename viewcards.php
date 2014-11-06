@@ -18,6 +18,7 @@
 </head>
 <body>
 <?php
+require("header.php");
 
 if(isset($_GET['status'])){
     $msg = '';
@@ -75,6 +76,8 @@ catch(PDOException $e)
     }
 $conn = null;
 echo "</table>";
+
+require("footer.php");
 ?>
 
 </body>

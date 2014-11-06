@@ -1,7 +1,7 @@
 <?php
 
 if(!$_POST['inputFile']){
-    header("Location: addcards_form.html");
+    header("Location: addcards_form.php");
     exit;
 }
 

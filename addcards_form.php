@@ -10,10 +10,16 @@
 </head>
 <body>
 
-Add flashcards:<br>
-<form method="post" action="addcards.php">
-    Filename: <input type="text" name="inputFile"/>
-    <input type="submit" />
-</form>
+    <?php require("header.php"); ?>
     
+    Add flashcards:<br>
+    <form method="post" action="addcards.php">
+        Filename: <input type="text" name="inputFile"/>
+        <input type="submit" />
+    </form>
+        
+    <?php require("footer.php"); ?>
+
 </body>
+
+</html>
