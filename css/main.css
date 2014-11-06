@@ -8,6 +8,14 @@ body{
 	background-color: #9DBCEB;
 }
 
+.inline-wrapper {
+    display: inline-block;
+}
+
+.card-counter {
+    margin-top: 5px;
+}
+
 #debug {
 	background-color: #000000;
 	position: absolute;
@@ -95,6 +103,10 @@ body{
 	top: 50%;
 	transform: translateY(-50%);
 	font-size: 18pt;
+}
+
+#btn-skip {
+    vertical-align: top;
 }
 
 #footer {

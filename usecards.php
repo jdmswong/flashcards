@@ -72,8 +72,14 @@ $conn = null;
 					<div id="flashcard"><p>SOME TEXT</p></div>
 					
 					<div id="control-panel">
-						<button type="button" id="btn-correct">		Correct!	</button>
-						<button type="button" id="btn-incorrect">	Incorrect!	</button>
+						<div class="inline-wrapper">
+						    <button type="button" id="btn-correct">		Correct!	</button>
+						    <div class="card-counter" id="correct-counter">0</div>
+			            </div>
+						<div class="inline-wrapper">
+						    <button type="button" id="btn-incorrect">	Incorrect!	</button>
+						    <div class="card-counter" id="incorrect-counter">0</div>
+						</div>
 						<button type="button" id="btn-skip">		Skip		</button>
 					</div>
 				</div>

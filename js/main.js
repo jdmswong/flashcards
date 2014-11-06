@@ -16,6 +16,7 @@ $(document).ready(function(){
 	var discard = [];
 	var nextDeck = [];
 	var roundNum = 1;
+	var roundStats = { correct: 0, incorrect: 0 };
 	
 	var cardFrame = {
 		currentCardIndex: null,
@@ -47,6 +48,7 @@ $(document).ready(function(){
 			
 			refreshCounter();
 			updateRound();
+			updateStats();
 		},
 		
 		showFront: function(){
@@ -64,6 +66,7 @@ $(document).ready(function(){
 		},
 		
 		correct: function(){
+		    roundStats.correct++;
 			discard.push(deck.shift());
 			this.initialize();
 			if(deck.length == 0){
@@ -73,6 +76,7 @@ $(document).ready(function(){
 		},
 		
 		incorrect: function(){
+		    roundStats.incorrect++;
 			nextDeck.push(deck.shift());
 			this.initialize();
 			if(deck.length == 0){
@@ -136,12 +140,21 @@ $(document).ready(function(){
 		nextDeck = [];
 		discard = [];
 		incrementRound();
+        roundStats.correct = 0;
+        roundStats.incorrect = 0;
 		cardFrame.initialize();
 	}
 	
 	// Sets counter to "x of <total>"
 	function refreshCounter(){
 		$(" #card-counter ").text(deck.length + " remaining");
+	}
+	
+	// Updates correct and incorrect counters
+	function updateStats(){
+        $(" #correct-counter ").text(roundStats.correct);
+        $(" #incorrect-counter ").text(roundStats.incorrect);
+	    
 	}
 	
 	function incrementRound(){
