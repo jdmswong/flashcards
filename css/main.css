@@ -8,6 +8,13 @@ body{
 	background-color: #9DBCEB;
 }
 
+table {
+    border: solid 1px black;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+}
+
 .inline-wrapper {
     display: inline-block;
 }
@@ -59,13 +66,13 @@ body{
 	overflow: auto;
 }
 
-#game-area{
+#center-area{
 	background-color: #66FF99;
 	margin-right: auto;
 	margin-left: auto;
 	margin-top: 10px;
 	margin-bottom: 10px;
-	height: 500px;
+	min-height: 500px;
 	width: 600px;
 	text-align: center;
 	overflow: auto;

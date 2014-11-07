@@ -12,9 +12,11 @@
     <?php require("header.php"); ?>
     
     Current options:<br>
-    <a href="addcards_form.php">Add cards</a><br>
-    <a href="viewcards.php">View cards</a><br>
-    <a href="usecards.php">Use cards</a><br>
+    <ul>
+        <li><a href="addcards_form.php">Add cards</a></li>
+        <li><a href="viewcards.php">View cards</a></li>
+        <li><a href="usecards.php">Use cards</a></li>
+    </ul>
     
     <?php require("footer.php"); ?>
 </body>

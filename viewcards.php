@@ -30,7 +30,7 @@ if(isset($_GET['status'])){
     echo $msg."<br/>";
 }
 
-echo "<table style='border: solid 1px black;'>";
+echo "<table>";
 echo "<tr><th>Card Front</th><th>Card back</th></tr>";
 
 class TableRows extends RecursiveIteratorIterator { 
@@ -68,6 +68,7 @@ try {
 
     foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) { 
         echo $v;
+        
     }
     }
 catch(PDOException $e)
@@ -75,6 +76,7 @@ catch(PDOException $e)
     echo "Error: " . $e->getMessage();
     }
 $conn = null;
+
 echo "</table>";
 
 require("footer.php");

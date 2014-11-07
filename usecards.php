@@ -53,8 +53,6 @@ $conn = null;
 	
 <?php require("header.php")?>			    
 			    
-			    
-<div id="game-area">
 	<div id="title">Flashcards</div>
 	
 	<div id="header-stats">
@@ -75,8 +73,6 @@ $conn = null;
 		</div>
 		<button type="button" id="btn-skip">		Skip		</button>
 	</div>
-</div>
-				
 				
 <?php require("footer.php");		 ?>		
 	

@@ -9,3 +9,5 @@
             </div>
                         
             <div id="content">
+                
+                <div id="center-area">
