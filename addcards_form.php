@@ -12,6 +12,12 @@
 
     <?php require("header.php"); ?>
     
+    Select deck: 
+    <select name="deck-select">
+        
+    </select>
+
+    
     Add flashcards:<br>
     <form method="post" action="addcards.php">
         Filename: <input type="text" name="inputFile"/>

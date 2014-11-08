@@ -23,10 +23,7 @@ fclose($fh);
 // print_r($values);
 // exit;
 
-$servername = "127.0.0.1";
-$username   = "jd";
-$password   = "Awesomemysql123";
-$dbname     = "flashcards";
+require("dbinfo.inc");
 
 $e=null;
 try {

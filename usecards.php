@@ -12,10 +12,7 @@
     <script>
         var flashCards = 
 <?php
-$servername = "127.0.0.1";
-$username   = "jd";
-$password   = "Awesomemysql123";
-$dbname     = "flashcards";
+require("dbinfo.inc");
 
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
