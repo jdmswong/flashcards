@@ -1,11 +1,15 @@
 <?php
 
-if(!$_POST['inputFile']){
-    header("Location: addcards_form.php");
-    exit;
-}
+// if(!$_POST['inputFile']){
+    // header("Location: addcards_form.php");
+    // exit;
+// }elseif($_POST['deck-select'] == -1 && !$_POST['new-deck-title']){
+    // header("Location: addcards_form.php");
+    // exit;
+// }
 
 $inputfile = $_POST['inputFile'];
+$currentUserID = 1;
 
 $fh = fopen($inputfile, "r") or die("Unable to open file!");
 
@@ -20,22 +24,43 @@ while( !feof( $fh) ){
 
 fclose($fh);
 
-// print_r($values);
-// exit;
-
 require("dbinfo.inc");
 
 $e=null;
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
+    //echo "\$_POST['new-deck-title-input']=".$_POST['new-deck-title-input']."<br>";
+    
+    // get/create deck
+    $deckid = -1;
+    if($_POST['deck-select'] == -1){
+        
+        $stmt_newDeck = $conn->prepare(
+            "INSERT INTO decks(userid,name) VALUES(?,?)"
+        );
+        $result = $stmt_newDeck->execute(array($currentUserID, $_POST['new-deck-title-input']));
+        
+        $stmt_getDeckID = $conn->prepare("SELECT deckid FROM decks WHERE userid=? AND name=?");
+        $stmt_getDeckID->execute(array($currentUserID, $_POST['new-deck-title-input']));
+
+        // set the resulting array to associative
+        $stmt_getDeckID->setFetchMode(PDO::FETCH_ASSOC); 
+        $rrow = $stmt_getDeckID->fetch();
+        
+        $deckid = $rrow["deckid"];
+    }else{
+        $deckid = $_POST['deck-select'];
+    }
+
     // begin the transaction
     $conn->beginTransaction();
     // SQL statements
-    $stmt = $conn->prepare("INSERT INTO flashcards (userid, front, back) VALUES (1,?,?)");
+    $stmt = $conn->prepare("INSERT INTO flashcards (userid, deckid, front, back) VALUES (1,?,?,?)");
     foreach( $values as $rr ){
-       $stmt->execute(array($rr[0],$rr[1]));
+       $stmt->execute(array($deckid, $rr[0], $rr[1]));
     }
     
     $conn->commit();

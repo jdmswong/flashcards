@@ -15,6 +15,10 @@ table {
     margin-top: 15px;
 }
 
+form > * {
+    margin-top: 10px;
+}
+
 .inline-wrapper {
     display: inline-block;
 }
@@ -76,6 +80,10 @@ table {
 	width: 600px;
 	text-align: center;
 	overflow: auto;
+}
+
+#new-deck-title{
+    display: block;
 }
 
 #title{

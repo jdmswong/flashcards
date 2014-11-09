@@ -2,15 +2,31 @@
 
 echo "HELLO WORLD!<br>";
 
-$matrix = array();
-for ($i=0; $i < 5; $i++) { 
-	$tokens = array($i,$i+1,$i+2);
-    array_push($matrix, $tokens);
-}
+require("dbinfo.inc");
 
-foreach( $matrix as $row){
-    echo $row[0]," ",$row[1],"\n";
-}
+try {
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $stmt = $conn->prepare("SELECT deckid,name FROM decks"); 
+    $stmt->execute();
 
+    // set the resulting array to associative
+    $stmt->setFetchMode(PDO::FETCH_ASSOC); 
+    
+    //nl2br( var_dump($stmt->fetch())."\n" );
+    
+    foreach( $stmt->fetchall() as $rrow ){
+        echo '<option value="'.$rrow["deckid"].'">'.$rrow["name"].'</option>';
+        // echo "--------------<br>";
+        // nl2br( var_dump($rrow)."\n" );
+    }
+    
+    
+    }
+catch(PDOException $e)
+    {
+    echo "Error: " . $e->getMessage();
+    }
+$conn = null;
 
 ?>
