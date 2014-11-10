@@ -1,6 +1,7 @@
 <?php/* 
 Caller variables recognized:
- * bool newDeckOption: assert default first "create new deck" option of value -1 
+ * bool newDeckOption:  assert default first "create new deck" option of value -1 
+ * bool allDecksOption: assert "All decks" option of value "all"
 */?>
         Select deck: 
         <select name="deckid">
@@ -8,6 +9,12 @@ Caller variables recognized:
 if(isset($newDeckOption) && $newDeckOption == true){
     ?>
             <option value="-1">Create new deck</option>
+    <?php
+}
+
+if(isset($allDecksOption) && $allDecksOption == true){
+    ?>
+            <option value="all">All decks</option>
     <?php
 }
 

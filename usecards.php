@@ -14,10 +14,17 @@
 <?php
 require("dbinfo.inc");
 
+if(isset($_GET['deckid'])){
+
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $stmt = $conn->prepare("SELECT front,back FROM flashcards"); 
+    if($_GET['deckid'] == 'all'){
+        $stmt = $conn->prepare("SELECT front,back FROM flashcards"); 
+    }else{
+        $stmt = $conn->prepare("SELECT front,back FROM flashcards WHERE deckid=?");
+        $stmt->bindValue(1, $_GET['deckid']);
+    }
     $stmt->execute();
 
     // set the resulting array to associative
@@ -33,7 +40,8 @@ catch(PDOException $e)
     echo "Error: " . $e->getMessage();
     }
 $conn = null;
-    
+
+}    
 ?>;
         
     </script>
@@ -48,7 +56,10 @@ $conn = null;
 	</div>
 	-->
 	
-<?php require("header.php")?>			    
+<?php 
+require("header.php");
+if(isset($_GET['deckid'])){
+?>			    
 			    
 	<div id="title">Flashcards</div>
 	
@@ -71,7 +82,25 @@ $conn = null;
 		<button type="button" id="btn-skip">		Skip		</button>
 	</div>
 				
-<?php require("footer.php");		 ?>		
+<?php 
+}else{
+    $allDecksOption = true;
+?>
+Choose a deck:
+<form method="get" action="<?php echo basename(__FILE__); ?>" >
+    <?php 
+    require("inc/deckselect.inc"); 
+    foreach($_GET as $k=>$v){
+        echo '<input type="hidden" name="'.$k.'" value="'.$v.'" />';
+    }
+    ?>
+    <input type="submit" />
+</form>
+<?php    
+    
+}
+require("footer.php");		 
+?>		
 	
 </body>
 
