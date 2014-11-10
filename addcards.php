@@ -1,13 +1,5 @@
 <?php
 
-// if(!$_POST['inputFile']){
-    // header("Location: addcards_form.php");
-    // exit;
-// }elseif($_POST['deck-select'] == -1 && !$_POST['new-deck-title']){
-    // header("Location: addcards_form.php");
-    // exit;
-// }
-
 $inputfile = $_POST['inputFile'];
 $currentUserID = 1;
 
@@ -36,7 +28,7 @@ try {
     
     // get/create deck
     $deckid = -1;
-    if($_POST['deck-select'] == -1){
+    if($_POST['deckid'] == -1){
         
         $stmt_newDeck = $conn->prepare(
             "INSERT INTO decks(userid,name) VALUES(?,?)"
@@ -52,7 +44,7 @@ try {
         
         $deckid = $rrow["deckid"];
     }else{
-        $deckid = $_POST['deck-select'];
+        $deckid = $_POST['deckid'];
     }
 
     // begin the transaction
@@ -73,7 +65,7 @@ catch(PDOException $e)
 $conn = null;
 
 if($e == null){
-    header("Location: viewcards.php?status=added");
+    header("Location: viewcards.php?status=added&deckid=".$deckid);
     exit;
 }
 
