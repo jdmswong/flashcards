@@ -3,7 +3,7 @@ $(document).ready(function(){
 // TODO check for duplicate deck name when creating new deck. call to php script perhaps?
     
 setDeckTitleDisplay();
-$("select[name=deck-select]").change( setDeckTitleDisplay );
+$("select[name=deckid]").change( setDeckTitleDisplay );
 
 // Force validation before submission
 $("#add-card-form").submit(function(){
@@ -17,7 +17,7 @@ $("#add-card-form").submit(function(){
         console.log("error msg 1 active");
     }
     
-    if( $("input[name=inputFile]").val() == '' ){
+    if( $("input[name=input-file]").val() == '' ){
         errormsg += "Provide a filename";
         console.log("error msg 2 active");
     }
