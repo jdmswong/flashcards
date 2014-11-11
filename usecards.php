@@ -7,14 +7,16 @@
 	<link type="text/css" rel="stylesheet" href="css/reset.css"/>
 	<link type="text/css" rel="stylesheet" href="css/main.css"/>
 	<script src="js/jquery-2.0.3.js"></script>
-	<script src="js/main.js"></script>
+	<script src="js/usecards.js"></script>
 
     <script>
-        var flashCards = 
+        
 <?php
 require("dbinfo.inc");
 
 if(isset($_GET['deckid'])){
+
+echo "var flashCards = ";
 
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
@@ -41,8 +43,10 @@ catch(PDOException $e)
     }
 $conn = null;
 
+echo ";";
+
 }    
-?>;
+?>
         
     </script>
 </head>
@@ -82,6 +86,14 @@ if(isset($_GET['deckid'])){
 		<button type="button" id="btn-skip">		Skip		</button>
 	</div>
 				
+    <div id="key-info">
+        <h1>Keyboard controls:</h1>
+        <table>
+            <tr><th>Flip card</th><th>Correct</th><th>Incorrect</th><th>Skip</th></tr>
+            <tr><td>spacebar</td><td>d</td><td>f</td><td>s</td></tr>
+        </table>
+    </div>
+
 <?php 
 }else{
     $allDecksOption = true;

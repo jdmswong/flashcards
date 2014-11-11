@@ -8,14 +8,6 @@ body{
 	background-color: #9DBCEB;
 }
 
-table {
-    border: solid 1px black;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 15px;
-    margin-bottom: 20px;
-}
-
 form > * {
     margin-top: 10px;
 }
@@ -77,6 +69,8 @@ form > * {
 	margin-left: auto;
 	margin-top: 10px;
 	margin-bottom: 10px;
+	padding-top: 20px;
+	padding-bottom: 30px;
 	min-height: 500px;
 	width: 600px;
 	text-align: center;
@@ -87,9 +81,10 @@ form > * {
     display: block;
 }
 
+/*====== usecards.php ======*/
+
 #title{
 	background-color: #FF9966;
-	margin-top: 10px;
 	margin-bottom: 10px;
 	margin-left: auto;
 	margin-right: auto;
@@ -132,6 +127,44 @@ form > * {
 #btn-skip {
     vertical-align: top;
 }
+
+#key-info {
+    border: solid 1px black;
+    width: 62%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+}
+
+#key-info h1 {
+    margin-top: 10px;
+}
+
+#key-info table {
+    border: solid 1px black;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    
+}
+
+#key-info th, td {
+    border: solid 1px black;
+    padding: 4px;
+}
+
+/*====== viewcards.php ======*/
+
+#card-table {
+    border: solid 1px black;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+/*====== ============= ======*/
 
 #footer {
 	background-color: #DBC0CF;

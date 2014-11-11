@@ -32,7 +32,7 @@ if(isset($_GET['deckid'])){
         echo $msg."<br/>";
     }
 
-    echo "<table>";
+    echo '<table id="card-table">';
     echo "<tr><th>Card Front</th><th>Card back</th></tr>";
     
     class TableRows extends RecursiveIteratorIterator { 
@@ -83,20 +83,19 @@ if(isset($_GET['deckid'])){
     $conn = null;
     
     echo "</table>";
-
 }else{
-?>
-Choose a deck:
-<form method="get" action="<?php echo basename(__FILE__); ?>" >
-    <?php 
-    require("inc/deckselect.inc"); 
-    foreach($_GET as $k=>$v){
-        echo '<input type="hidden" name="'.$k.'" value="'.$v.'" />';
-    }
     ?>
-    <input type="submit" />
-</form>
-<?php    
+    Choose a deck:
+    <form method="get" action="<?php echo basename(__FILE__); ?>" >
+        <?php 
+        require("inc/deckselect.inc"); 
+        foreach($_GET as $k=>$v){
+            echo '<input type="hidden" name="'.$k.'" value="'.$v.'" />';
+        }
+        ?>
+        <input type="submit" />
+    </form>
+    <?php    
 }
 
 require("footer.php");
