@@ -132,17 +132,18 @@ if( $("#flashcard").length != 0 ){
     
         // Keyboard controls
         $("body").keypress(function(e){
+            //console.log(e.charCode);
             switch(e.charCode){
-                case 100: // d
-                    cardFrame.correct();
-                    break;
-                case 102: // f
-                    cardFrame.incorrect();
-                    break;
-                case 115: // s
+                case 97: // a
                     cardFrame.skip();
                     break;
-                case 32: // spacebar
+                case 115: // s
+                    cardFrame.correct();
+                    break;
+                case 100: // d
+                    cardFrame.incorrect();
+                    break;
+                case 102: // f
                     cardFrame.flip();
                     break;
             }

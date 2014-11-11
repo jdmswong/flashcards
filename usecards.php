@@ -89,8 +89,8 @@ if(isset($_GET['deckid'])){
     <div id="key-info">
         <h1>Keyboard controls:</h1>
         <table>
-            <tr><th>Flip card</th><th>Correct</th><th>Incorrect</th><th>Skip</th></tr>
-            <tr><td>spacebar</td><td>d</td><td>f</td><td>s</td></tr>
+            <tr><th>Skip</th><th>Correct</th><th>Incorrect</th><th>Flip card</th></tr>
+            <tr><td>a</td><td>s</td><td>d</td><td>f</td></tr>
         </table>
     </div>
 
