@@ -31,7 +31,7 @@ $("#add-card-form").submit(function(){
 });
 
 function setDeckTitleDisplay(){
-    if($("select[name=deck-select]").val() != -1 ){
+    if($("select[name=deckid]").val() != -1 ){
         $("#new-deck-title").css("display","none");
     }else{
         $("#new-deck-title").css("display","block");

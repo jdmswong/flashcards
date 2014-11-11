@@ -1,8 +1,77 @@
 <?php
 
-$inputfile = $_POST['inputFile'];
 $currentUserID = 1;
 
+// upload the file, foil the hackers
+$uploadDir = '/tmp';
+try {
+    
+    var_dump($_FILES)."<br>\n";
+    
+    
+    // Undefined | Multiple Files | $_FILES Corruption Attack
+    // If this request falls under any of them, treat it invalid.
+    if (
+        !isset($_FILES['inputFile']['error']) ||
+        is_array($_FILES['inputFile']['error'])
+    ) {
+        throw new RuntimeException('Invalid parameters.');
+    }
+
+    // Check $_FILES['inputFile']['error'] value.
+    switch ($_FILES['inputFile']['error']) {
+        case UPLOAD_ERR_OK:
+            break;
+        case UPLOAD_ERR_NO_FILE:
+            throw new RuntimeException('No file sent.');
+        case UPLOAD_ERR_INI_SIZE:
+        case UPLOAD_ERR_FORM_SIZE:
+            throw new RuntimeException('Exceeded filesize limit.');
+            break;
+        default:
+            throw new RuntimeException('Unknown errors.');
+    }
+
+    // Should also check filesize here. 
+    if ($_FILES['inputFile']['size'] > 1000000) {
+        throw new RuntimeException('Exceeded filesize limit.');
+    }
+
+    // DO NOT TRUST $_FILES['inputFile']['mime'] VALUE !!
+    // Check MIME Type by yourself.
+    $finfo = new finfo(FILEINFO_MIME_TYPE);
+    if (false === $ext = array_search(
+        $finfo->file($_FILES['inputFile']['tmp_name']),
+        array(
+            'txt' => 'text/plain',
+        ),
+        true
+    )) {
+        //throw new RuntimeException('Invalid file format.');
+    }
+
+    // You should name it uniquely.
+    // DO NOT USE $_FILES['inputFile']['name'] WITHOUT ANY VALIDATION !!
+    // On this example, obtain safe unique name from its binary data.
+    $inputfile = sprintf($uploadDir.'/%s.%s',
+            sha1_file($_FILES['inputFile']['tmp_name']),
+            $ext );
+    if (!move_uploaded_file(
+        $_FILES['inputFile']['tmp_name'],
+        $inputfile
+    )) {
+        throw new RuntimeException('Failed to move uploaded file.');
+    }
+
+    //echo 'File is uploaded successfully<br>';
+
+} catch (RuntimeException $e) {
+
+    echo $e->getMessage();
+    exit;
+}
+
+// now open and play
 $fh = fopen($inputfile, "r") or die("Unable to open file!");
 
 $values = array();
@@ -15,6 +84,7 @@ while( !feof( $fh) ){
 }
 
 fclose($fh);
+unlink($inputfile);
 
 require("dbinfo.inc");
 
@@ -23,8 +93,6 @@ try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
 
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    
-    //echo "\$_POST['new-deck-title-input']=".$_POST['new-deck-title-input']."<br>";
     
     // get/create deck
     $deckid = -1;

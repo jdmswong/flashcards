@@ -149,7 +149,7 @@ form > * {
     
 }
 
-#key-info th, td {
+#key-info th, #key-info td {
     border: solid 1px black;
     padding: 4px;
 }

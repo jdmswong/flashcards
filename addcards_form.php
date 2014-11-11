@@ -15,8 +15,8 @@
     
     
     Add flashcards:<br>
-    <form id="add-card-form" method="post" action="addcards.php">
-        Filename: <input type="text" name="inputFile"/><br/>
+    <form id="add-card-form" method="post" action="addcards.php" enctype="multipart/form-data">
+        Filename: <input type="file" name="inputFile"/><br/>
         
         <?php $newDeckOption = true; require("inc/deckselect.inc"); ?>
         <div id="new-deck-title">
