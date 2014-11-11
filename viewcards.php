@@ -33,7 +33,6 @@ if(isset($_GET['deckid'])){
     }
 
     echo '<table id="card-table">';
-    echo "<tr><th>Card Front</th><th>Card back</th></tr>";
     
     class TableRows extends RecursiveIteratorIterator { 
         function __construct($it) { 
@@ -58,19 +57,31 @@ if(isset($_GET['deckid'])){
     try {
         $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        if(isset( $_GET['deckid']) ){
+        $tableCols = array();
+        if( $_GET['deckid'] == 'all' ){
+            $tableCols = array("Deck name","front","back");
+            $sql = "
+                SELECT decks.name,front,back 
+                FROM flashcards JOIN decks ON decks.deckid = flashcards.deckid
+                ORDER BY decks.deckid, cardid ";
+            $stmt = $conn->prepare($sql); 
+        }else{
+            $tableCols = array("front","back");
             $sql = "SELECT front,back FROM flashcards WHERE deckid=?";
             $stmt = $conn->prepare($sql); 
             $stmt->bindValue(1, $_GET['deckid']);
-        }else{
-            $sql = "SELECT front,back FROM flashcards";
-            $stmt = $conn->prepare($sql); 
         }
         $stmt->execute();
     
         // set the resulting array to associative
         $result = $stmt->setFetchMode(PDO::FETCH_ASSOC); 
     
+        echo "<tr>";
+        foreach($tableCols as $colName){
+            echo "<th>".$colName."</th>";
+        }
+        echo "</tr>";
+        
         foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) { 
             echo $v;
             
@@ -88,6 +99,7 @@ if(isset($_GET['deckid'])){
     Choose a deck:
     <form method="get" action="<?php echo basename(__FILE__); ?>" >
         <?php 
+        $allDecksOption = true;
         require("inc/deckselect.inc"); 
         foreach($_GET as $k=>$v){
             echo '<input type="hidden" name="'.$k.'" value="'.$v.'" />';

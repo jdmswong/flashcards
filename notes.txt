@@ -7,3 +7,6 @@ to
   $cfg['Servers'][$i]['host'] = '127.0.0.1';
 
 print_r: prints variables in human readable format
+
+to dump mysql schema:
+ mysqldump.exe -h 127.0.0.1 -u root -p --no-data flashcards > mysql/dbdump.sql 
