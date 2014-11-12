@@ -28,14 +28,13 @@ $("#add-card-form").submit(function(){
         
     }else if( $("#radio-manual").prop("checked") == true ){
         if( 
-            cardInputClicked == false ||
             $("#card-input").val().match(/^\s*$/) 
         ){
             errormsg += "Enter values in card input textbox\n";
             
-        }else if( faultLine = validateCardInput() != true ){
+        }else if( (faultLine = validateCardInput() ) != true ){
             
-            errormsg += "Line improperly formatted: "+faultLine+"\n";
+            errormsg += "Line improperly formatted: \""+faultLine+"\"\n";
             
         }
         
@@ -84,7 +83,7 @@ function validateCardInput(){
         if(!lines[i]){
             continue;
         }
-        if( !lines[i].match(/^\s*\S+\s*,\s*\s*\S+\s*$/) ){
+        if( !lines[i].match(/^\s*.*\S+.*\s*,\s*\s*.*\S+.*\s*$/) ){
             return lines[i];
         }
     }
