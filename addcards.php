@@ -86,7 +86,7 @@ while( !feof( $fh) ){
 fclose($fh);
 unlink($inputfile);
 
-require("dbinfo.inc");
+require("inc/dbinfo.inc");
 
 $e=null;
 try {

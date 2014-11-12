@@ -2,7 +2,7 @@
 
 echo "HELLO WORLD!<br>";
 
-require("dbinfo.inc");
+require("inc/dbinfo.inc");
 
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);

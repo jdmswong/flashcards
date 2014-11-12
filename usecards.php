@@ -12,7 +12,7 @@
     <script>
         
 <?php
-require("dbinfo.inc");
+require("inc/dbinfo.inc");
 
 if(isset($_GET['deckid'])){
 
@@ -35,7 +35,6 @@ try {
     echo json_encode( $stmt->fetchAll() );
     
     
-    $dsn = null;
     }
 catch(PDOException $e)
     {
@@ -65,7 +64,13 @@ require("header.php");
 if(isset($_GET['deckid'])){
 ?>			    
 			    
-	<div id="title">Flashcards</div>
+	<div id="title"><?php 
+	   if($_GET['deckid'] == 'all'){
+	       echo "All Decks";
+	   }else{
+	       require("inc/getdeckname.inc"); 
+	       echo getDeckName($_GET['deckid']); 
+       }?></div>
 	
 	<div id="header-stats">
 		<div id="round-counter">Round 0</div>

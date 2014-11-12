@@ -19,7 +19,7 @@ if(isset($allDecksOption) && $allDecksOption == true){
 }
 
 function newScope(){
-    require("dbinfo.inc");
+    require("inc/dbinfo.inc");
     
     try {
         $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
