@@ -172,6 +172,10 @@ form > * {
     margin-bottom: 20px;
 }
 
+#card-table td {
+    width:150px;
+    border:1px solid black;
+}
 /*====== ============= ======*/
 
 #footer {
