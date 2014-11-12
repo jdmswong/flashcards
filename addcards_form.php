@@ -16,8 +16,10 @@
     <div id="add-form-div">
         Add flashcards:<br>
         <form id="add-card-form" method="post" action="addcards.php" enctype="multipart/form-data">
-            <input type="radio" name="input-method" id="radio-upload" value="upload">File Upload</input>, 
-            <input type="radio" name="input-method" id="radio-manual" value="manual" checked="checked">Manual entry</input><br>
+            <input type="radio" name="input-method" id="radio-upload" value="upload"/>
+            <span>File Upload</span>, 
+            <input type="radio" name="input-method" id="radio-manual" value="manual" checked="checked"/>
+            <span>Manual entry</span><br>
             
             <div id="file-upload">
                 Filename: <input type="file" name="input-file"/><br/>

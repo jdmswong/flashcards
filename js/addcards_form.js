@@ -7,6 +7,10 @@ setMethodDisplay();
 $("select[name=deckid]").change( setDeckTitleDisplay );
 $("input[name=input-method]").change( setMethodDisplay );
 
+// clickable labels
+$("#radio-upload + span").click(function(){ $("#radio-upload").prop("checked", true).change(); });
+$("#radio-manual + span").click(function(){ $("#radio-manual").prop("checked", true).change(); });
+
 var cardInputClicked = false;
 $("#card-input").click( cardInputClick );
 
