@@ -154,6 +154,14 @@ form > * {
     padding: 4px;
 }
 
+/*====== addcards_form.php ======*/
+#add-form-div {
+    width: 315px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+
 /*====== viewcards.php ======*/
 
 #card-table {

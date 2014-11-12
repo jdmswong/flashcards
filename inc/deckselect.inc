@@ -4,7 +4,7 @@ Caller variables recognized:
  * bool allDecksOption: assert "All decks" option of value "all"
 */?>
         Select deck: 
-        <select name="deckid">
+        <select id="deckid" name="deckid">
 <?php 
 if(isset($newDeckOption) && $newDeckOption == true){
     ?>
