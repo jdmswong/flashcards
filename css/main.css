@@ -161,6 +161,23 @@ form > * {
     margin-right: auto;
     text-align: left;
 }
+/*====== deckoptions.php ======*/
+
+#tbl-deck-select {
+    display: inline-block;
+    border: solid 1px black;
+}
+
+#tbl-deck-select td {
+    border: solid 1px black;
+    padding: 4px;
+    
+}
+
+#tbl-deck-select th {
+    padding: 4px;
+    
+}
 
 /*====== viewcards.php ======*/
 

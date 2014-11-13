@@ -14,7 +14,7 @@
     Current options:<br>
     <ul>
         <li><a href="addcards_form.php">Add cards</a></li>
-        <li><a href="viewcards.php">View cards</a></li>
+        <li><a href="deckoptions.php">Your decks</a></li>
         <li><a href="usecards.php">Use cards</a></li>
     </ul>
     
