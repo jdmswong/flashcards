@@ -16,6 +16,10 @@ function getDeckName($deckid){
     
         $result = $stmt->fetch();
         
+        if( $stmt->rowCount() < 1 ){
+            return -1;
+        }
+        
         }
     catch(PDOException $e)
         {

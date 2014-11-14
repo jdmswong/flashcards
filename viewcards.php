@@ -7,14 +7,6 @@
     <link type="text/css" rel="stylesheet" href="css/reset.css"/>
     <link type="text/css" rel="stylesheet" href="css/main.css"/>
     <script src="js/jquery-2.0.3.js"></script>
-    <script>
-<?php
-
-
-
-?>
-        
-    </script>
 </head>
 <body>
 <?php
@@ -31,6 +23,10 @@ if(isset($_GET['deckid'])){
         }
         echo $msg."<br/>";
     }
+
+    require("inc/getdeckname.inc");
+    echo '<div id=title>'.
+        ($_GET['deckid'] == 'all' ? "All Decks" : getDeckName($_GET['deckid'])) . "</div>";
 
     echo '<table id="card-table">';
     
