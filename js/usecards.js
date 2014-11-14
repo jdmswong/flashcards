@@ -72,7 +72,6 @@ if( $("#flashcard").length != 0 ){
     		discard.push(deck.shift());
     		this.initialize();
     		if(deck.length == 0){
-    			console.log("deck finished");
     			this.deckClosure();
     		}
     	},
@@ -82,7 +81,6 @@ if( $("#flashcard").length != 0 ){
     		nextDeck.push(deck.shift());
     		this.initialize();
     		if(deck.length == 0){
-    			console.log("deck finished");
     			this.deckClosure();
     		}
     	},
@@ -96,10 +94,12 @@ if( $("#flashcard").length != 0 ){
     	},
     	
     	deckClosure: function(){
-    		console.log("discard:");
-    		console.log(discard);
-    		console.log("nextDeck");
-    		console.log(nextDeck);
+    		if(false){
+        		console.log("discard:");
+        		console.log(discard);
+        		console.log("nextDeck");
+        		console.log(nextDeck);
+    		}
     		
     		alert(
     			"Round over! " + discard.length + "/" + ( discard.length + nextDeck.length ) 
