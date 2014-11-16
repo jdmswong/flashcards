@@ -7,15 +7,24 @@
  *      params: $_GET['deckids']=1,2,3,...
  *      delete deck(s)
  *  
- *  
+ *  combine:
+ *      Combines all passed decks into a new one, removing the old deck titles
+ *      params: 
+ *          deckids: comma separated. no spaces, empty spots, or duplicates
+ *          newdecktitle: title of new deck created from combination
+ *          userid: id of acting user
  */
 
 
 if($_GET['action'] == 'delete'){
-    deleteDecks();
+    deleteDecks(getDeckIDs());
+}else if($_GET['action'] == 'combine'){
+    combineDecks(getDeckIDs());
+}else if($_GET['action'] == 'copy'){
+    copyDeck(getDeckIDs());
 }
 
-function deleteDecks(){
+function getDeckIDs(){
     if(!isset($_GET['deckids'])){
         die("ERROR: no deckids");
     }
@@ -23,12 +32,18 @@ function deleteDecks(){
     if(!preg_match('/^\d+(,\d+)*$/', $_GET['deckids'])){
         die("ERROR: \$_GET[deckids] improperly formatted");
     }
-
+    
     $deckids = preg_split('/,/', $_GET['deckids']);
 
     if(count(array_unique($deckids))<count($deckids)){
         die("ERROR: No duplicate values");
     }
+    
+    return $deckids;
+}
+
+function deleteDecks($deckids){
+
     
     require("inc/dbinfo.inc");
     
@@ -36,9 +51,12 @@ function deleteDecks(){
         $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
-        $sql = "DELETE FROM decks WHERE deckid=? ";
+        $sql = "
+            DELETE decks,flashcards 
+            FROM decks INNER JOIN flashcards ON flashcards.deckid = decks.deckid
+            WHERE decks.deckid=? ";
         for($i=0; $i<sizeof($deckids)-1; $i++){
-            $sql .= "OR deckid=?";
+            $sql .= "OR decks.deckid=?";
         }
         
         $stmt = $conn->prepare($sql);
@@ -51,5 +69,104 @@ function deleteDecks(){
     
     header("Location: deckoptions.php");
 }
- 
+
+function combineDecks($deckids){
+    
+    $currentUserID = $_GET['userid'];
+    
+    require("inc/dbinfo.inc");
+    
+    try {
+        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        
+        // Create new deck
+        $newDeckTitle = $_GET['newdecktitle'];
+        
+        $stmt_newDeck = $conn->prepare(
+            "INSERT INTO decks(userid,name) VALUES(?,?)"
+        );
+        if(!$stmt_newDeck->execute(array($currentUserID, $newDeckTitle))){
+            die("No decks added");
+        }
+        
+        $stmt_getDeckID = $conn->prepare("SELECT deckid FROM decks WHERE userid=? AND name=?");
+        $stmt_getDeckID->execute(array($currentUserID, $newDeckTitle));
+
+        // set the resulting array to associative
+        $stmt_getDeckID->setFetchMode(PDO::FETCH_ASSOC); 
+        $rrow = $stmt_getDeckID->fetch();
+        
+        $deckid = $rrow["deckid"];
+    
+        
+        // Reassign to new deck
+        $sql = "UPDATE flashcards SET deckid=? WHERE deckid=? ";
+        for($i=0; $i<sizeof($deckids)-1; $i++){
+            $sql .= "OR deckid=?";
+        }
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(array_merge(array($deckid),$deckids));
+        
+        // Delete now empty decks
+        deleteDecks($deckids);
+        
+    }catch(PDOException $e){
+        echo "Error: " . $e->getMessage();
+    }
+    $conn = null;
+    
+    header("Location: deckoptions.php");
+    
+}
+
+function copyDeck($deckids){
+    $currentUserID = $_GET['userid'];
+    $deckid = array_shift($deckids);
+    
+    require("inc/dbinfo.inc");
+    
+    try {
+        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        
+        // Create new deck
+        $newDeckTitle = $_GET['newdecktitle'];
+        
+        $stmt_newDeck = $conn->prepare(
+            "INSERT INTO decks(userid,name) VALUES(?,?)"
+        );
+        $result = $stmt_newDeck->execute(array($currentUserID, $newDeckTitle));
+        if(!$result){
+            die("No decks added");
+        }
+        
+        $stmt_getDeckID = $conn->prepare("SELECT deckid FROM decks WHERE userid=? AND name=?");
+        $stmt_getDeckID->execute(array($currentUserID, $newDeckTitle));
+
+        // set the resulting array to associative
+        $stmt_getDeckID->setFetchMode(PDO::FETCH_ASSOC); 
+        $rrow = $stmt_getDeckID->fetch();
+        
+        $newdeckid = $rrow["deckid"];
+
+        // Copy records into new deck
+        $sql = "
+            INSERT INTO flashcards (userid, deckid, front, back)
+            SELECT userid, ?, front, back
+            FROM flashcards 
+            WHERE deckid=?
+        ";
+        $stmt_insert = $conn->prepare($sql);
+        $stmt_insert->execute(array($newdeckid,$deckid));
+        
+    }catch(PDOException $e){
+        echo "Error: " . $e->getMessage();
+    }
+    $conn = null;
+    
+    header("Location: deckoptions.php");
+        
+    
+}
 ?>

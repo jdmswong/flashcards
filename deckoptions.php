@@ -58,6 +58,9 @@ Your decks:<br>
     ?>
 </table><br>
 <input id="btn-delete" type="button" name="delete" value="Delete"/>
+<input id="btn-combine" type="button" name="combine" value="Combine"/>
+<input id="btn-copy" type="button" name="comp" value="Copy"/>
+<br>
 
 
 <?php require("footer.php"); ?>

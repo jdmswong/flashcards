@@ -113,14 +113,16 @@ try {
     // get/create deck
     $deckid = -1;
     if($_POST['deckid'] == -1){
+            
+        $newDeckTitle = $_POST['new-deck-title-input'];
         
         $stmt_newDeck = $conn->prepare(
             "INSERT INTO decks(userid,name) VALUES(?,?)"
         );
-        $result = $stmt_newDeck->execute(array($currentUserID, $_POST['new-deck-title-input']));
+        $result = $stmt_newDeck->execute(array($currentUserID, $newDeckTitle));
         
         $stmt_getDeckID = $conn->prepare("SELECT deckid FROM decks WHERE userid=? AND name=?");
-        $stmt_getDeckID->execute(array($currentUserID, $_POST['new-deck-title-input']));
+        $stmt_getDeckID->execute(array($currentUserID, $newDeckTitle));
 
         // set the resulting array to associative
         $stmt_getDeckID->setFetchMode(PDO::FETCH_ASSOC); 
