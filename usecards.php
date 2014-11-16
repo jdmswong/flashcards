@@ -35,11 +35,9 @@ try {
     echo json_encode( $stmt->fetchAll() );
     
     
-    }
-catch(PDOException $e)
-    {
+}catch(PDOException $e){
     echo "Error: " . $e->getMessage();
-    }
+}
 $conn = null;
 
 echo ";";

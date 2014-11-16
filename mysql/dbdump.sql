@@ -28,7 +28,7 @@ CREATE TABLE `decks` (
   `name` varchar(30) NOT NULL,
   `description` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`deckid`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,7 +45,7 @@ CREATE TABLE `flashcards` (
   `front` varchar(30) NOT NULL,
   `back` varchar(30) NOT NULL,
   PRIMARY KEY (`cardid`)
-) ENGINE=InnoDB AUTO_INCREMENT=199 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=349 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -72,7 +72,7 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(9) NOT NULL AUTO_INCREMENT,
   `username` varchar(30) NOT NULL,
-  `password` varchar(30) NOT NULL COMMENT 'plain text for now',
+  `password` char(64) DEFAULT NULL,
   `name` varchar(30) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
@@ -88,4 +88,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-11-11  3:42:58
+-- Dump completed on 2014-11-16  1:11:14
