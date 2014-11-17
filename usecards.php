@@ -16,6 +16,7 @@
         
 <?php
 require("inc/dbinfo.inc");
+$userid = $_COOKIE['userid'];
 
 if(isset($_GET['deckid'])){
 
@@ -25,11 +26,23 @@ try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     if($_GET['deckid'] == 'all'){
-        $stmt = $conn->prepare("SELECT front,back FROM flashcards"); 
+        $stmt = $conn->prepare("
+            SELECT front,back 
+            FROM flashcards 
+            JOIN decks ON flashcards.deckid=decks.deckid 
+            WHERE userid=?
+        "); 
     }else{
-        $stmt = $conn->prepare("SELECT front,back FROM flashcards WHERE deckid=?");
-        $stmt->bindValue(1, $_GET['deckid']);
+        $stmt = $conn->prepare("
+            SELECT front,back 
+            FROM flashcards 
+            JOIN decks ON flashcards.deckid=decks.deckid 
+            WHERE userid=? 
+                AND flashcards.deckid=?
+            ");
+        $stmt->bindValue(2, $_GET['deckid']);
     }
+    $stmt->bindValue(1, $userid);
     $stmt->execute();
 
     // set the resulting array to associative

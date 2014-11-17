@@ -20,12 +20,13 @@ if(isset($allDecksOption) && $allDecksOption == true){
 
 function newScope(){
     require("inc/dbinfo.inc");
+    $userid = $_COOKIE['userid'];
     
     try {
         $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $stmt = $conn->prepare("SELECT deckid,name FROM decks"); 
-        $stmt->execute();
+        $stmt = $conn->prepare("SELECT deckid,name FROM decks WHERE userid=?"); 
+        $stmt->execute(array($userid));
     
         // set the resulting array to associative
         $stmt->setFetchMode(PDO::FETCH_ASSOC); 

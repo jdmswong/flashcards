@@ -24,6 +24,7 @@ Your decks:<br>
         <th>Deck Name</th><th>Cards</th></tr>
     <?php 
     require("inc/dbinfo.inc");
+    $userid = $_COOKIE['userid'];
     
     try {
         $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
@@ -31,9 +32,10 @@ Your decks:<br>
         $stmt = $conn->prepare("
             SELECT decks.deckid,name,count(*) AS cards
             FROM decks JOIN flashcards ON decks.deckid = flashcards.deckid
+            WHERE userid=?
             GROUP BY decks.deckid
         "); 
-        $stmt->execute();
+        $stmt->execute(array($userid));
     
         // set the resulting array to associative
         $stmt->setFetchMode(PDO::FETCH_ASSOC); 

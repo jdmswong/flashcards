@@ -46,6 +46,7 @@ function deleteDecks($deckids){
 
     
     require("inc/dbinfo.inc");
+    $userid = $_COOKIE['userid'];
     
     try {
         $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
@@ -54,16 +55,18 @@ function deleteDecks($deckids){
         $sql = "
             DELETE decks,flashcards 
             FROM decks INNER JOIN flashcards ON flashcards.deckid = decks.deckid
-            WHERE decks.deckid=? ";
+            WHERE userid=?
+                AND decks.deckid=? ";
         for($i=0; $i<sizeof($deckids)-1; $i++){
             $sql .= "OR decks.deckid=?";
         }
         
         $stmt = $conn->prepare($sql);
-        $stmt->execute($deckids);
+        $stmt->execute(array_merge(array($userid), $deckids));
     
     }catch(PDOException $e){
         echo "Error: " . $e->getMessage();
+        exit;
     }
     $conn = null;
     
@@ -72,7 +75,7 @@ function deleteDecks($deckids){
 
 function combineDecks($deckids){
     
-    $currentUserID = $_GET['userid'];
+    $currentUserID = $_COOKIE['userid'];
     
     require("inc/dbinfo.inc");
     
@@ -113,6 +116,7 @@ function combineDecks($deckids){
         
     }catch(PDOException $e){
         echo "Error: " . $e->getMessage();
+        exit;
     }
     $conn = null;
     
@@ -121,7 +125,7 @@ function combineDecks($deckids){
 }
 
 function copyDeck($deckids){
-    $currentUserID = $_GET['userid'];
+    $currentUserID = $_COOKIE['userid'];
     $deckid = array_shift($deckids);
     
     require("inc/dbinfo.inc");
@@ -152,16 +156,18 @@ function copyDeck($deckids){
 
         // Copy records into new deck
         $sql = "
-            INSERT INTO flashcards (userid, deckid, front, back)
-            SELECT userid, ?, front, back
-            FROM flashcards 
-            WHERE deckid=?
+            INSERT INTO flashcards (deckid, front, back)
+            SELECT ?, front, back
+            FROM flashcards JOIN decks ON flashcards.deckid = decks.deckid
+            WHERE userid=? 
+                AND flashcards.deckid=?
         ";
         $stmt_insert = $conn->prepare($sql);
-        $stmt_insert->execute(array($newdeckid,$deckid));
+        $stmt_insert->execute(array($newdeckid,$currentUserID,$deckid));
         
     }catch(PDOException $e){
         echo "Error: " . $e->getMessage();
+        exit;
     }
     $conn = null;
     

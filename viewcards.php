@@ -52,6 +52,7 @@ if(isset($_GET['deckid'])){
     } 
     
     require("inc/dbinfo.inc");
+    $userid = $_COOKIE['userid'];
     
     try {
         $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
@@ -62,14 +63,23 @@ if(isset($_GET['deckid'])){
             $sql = "
                 SELECT decks.name,front,back 
                 FROM flashcards JOIN decks ON decks.deckid = flashcards.deckid
+                WHERE userid=?
                 ORDER BY decks.deckid, cardid ";
             $stmt = $conn->prepare($sql); 
+            $stmt->bindValue(1, $userid);
         }else{
             $tableCols = array("front","back");
-            $sql = "SELECT front,back FROM flashcards WHERE deckid=?";
+            $sql = "
+                SELECT front,back 
+                FROM flashcards JOIN decks ON flashcards.deckid=decks.deckid 
+                WHERE userid=? 
+                    AND flashcards.deckid=?";
             $stmt = $conn->prepare($sql); 
-            $stmt->bindValue(1, $_GET['deckid']);
+            $stmt->bindValue(1, $userid);
+            $stmt->bindValue(2, $_GET['deckid']);
         }
+
+        
         $stmt->execute();
     
         // set the resulting array to associative
@@ -89,6 +99,7 @@ if(isset($_GET['deckid'])){
     catch(PDOException $e)
         {
         echo "Error: " . $e->getMessage();
+        exit;
         }
     $conn = null;
     

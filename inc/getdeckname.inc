@@ -3,13 +3,14 @@
 function getDeckName($deckid){
     
     require("inc/dbinfo.inc");
+    $userid = $_COOKIE['userid'];
     try {
         $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
-        $stmt = $conn->prepare("SELECT name FROM decks WHERE deckid=?"); 
+        $stmt = $conn->prepare("SELECT name FROM decks WHERE userid=? AND deckid=?"); 
         
-        $stmt->execute(array($deckid));
+        $stmt->execute(array($userid, $deckid));
     
         // set the resulting array to associative
         $result = $stmt->setFetchMode(PDO::FETCH_ASSOC); 

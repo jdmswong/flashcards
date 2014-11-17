@@ -1,7 +1,7 @@
 <?php require("inc/cookiecheck.inc"); ?>
 <?php
 
-$currentUserID = 1;
+$currentUserID = $_COOKIE['userid'];
 
 $values = array();
 if($_POST['input-method'] == 'upload'){
@@ -137,7 +137,7 @@ try {
     // begin the transaction
     $conn->beginTransaction();
     // SQL statements
-    $stmt = $conn->prepare("INSERT INTO flashcards (userid, deckid, front, back) VALUES (1,?,?,?)");
+    $stmt = $conn->prepare("INSERT INTO flashcards (deckid, front, back) VALUES (?,?,?)");
     foreach( $values as $rr ){
        $stmt->execute(array($deckid, $rr[0], $rr[1]));
     }
