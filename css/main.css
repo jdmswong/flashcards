@@ -39,6 +39,14 @@ form > * {
     
 }
 
+#user-corner p {
+    display: inline;
+}
+
+#user-corner a{
+    font-size: 12pt;
+}
+
 #debug {
 	background-color: #000000;
 	position: absolute;

@@ -1,5 +1,8 @@
 <?php
-if( !isset($_POST['username']) && !isset($_POST['password']) ){
+if(isset($_COOKIE['name']) && isset($_COOKIE['userid'])){
+    header("Location: welcome.php");
+    exit;
+}else if( !isset($_POST['username']) && !isset($_POST['password']) ){
 ?>
 <!DOCTYPE html>
 <html>
@@ -20,7 +23,7 @@ if( !isset($_POST['username']) && !isset($_POST['password']) ){
 <form method="post" action="<?php echo basename(__FILE__); ?>">
     Username: <input type="text" id="username" name="username" /><br>
     Password: <input type="password" id="password" name="password" /><br>
-    <input type="submit" />
+    <input type="submit" value="Submit"/>
 </form> 
 
 <?php require("footer.php"); ?>      

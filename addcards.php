@@ -1,3 +1,4 @@
+<?php require("inc/cookiecheck.inc"); ?>
 <?php
 
 $currentUserID = 1;

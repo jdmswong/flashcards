@@ -1,3 +1,4 @@
+<?php require("inc/cookiecheck.inc"); ?>
 <!DOCTYPE html>
 <html>
 
@@ -7,6 +8,8 @@
     <link type="text/css" rel="stylesheet" href="css/reset.css"/>
     <link type="text/css" rel="stylesheet" href="css/main.css"/>
     <script src="js/jquery-2.0.3.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <script src="js/common.js"></script>
 </head>
 <body>
     <?php require("header.php"); ?>

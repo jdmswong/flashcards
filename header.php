@@ -6,11 +6,12 @@
                 <div id="page-title">
                     <a href="index.php" >FlashCard Suite</a>
                 </div>
-                <div id="user-corner">
-                    <?php if(isset($_COOKIE['name'])) {
-                         echo '<p>Hello <span id="name">' . $_COOKIE['name'] . '</span>!</p>'; 
-                    } ?>
-                </div>
+                    <?php if(isset($_COOKIE['name']) && isset($_COOKIE['userid'])){ ?>
+                    <div id="user-corner">
+                         <p>Hello <span id="name"><?php echo $_COOKIE['name']; ?></span>!</p> 
+                    <a href="login.php" id="logout">Log out</a>
+                    </div>
+                    <?php } ?>
             </div>
                         
             <div id="content">
