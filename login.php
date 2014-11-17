@@ -49,9 +49,29 @@ if( !isset($_POST['username']) && !isset($_POST['password']) ){
         
         if(sizeof($result) == 1){
             // Login success!
+            //echo var_dump($_SERVER['HTTP_HOST']);
+            
+            // Bake up a cookie
+            $cookie_expire = time()+86400; // 24 hr life
+            //time() - 3600; // overdue expiration date. deletes cookie
+            $cookie_domain = $_SERVER['HTTP_HOST'];
+            
+            /*
+             * SERVER_NAME: localhost
+             * ["HTTP_HOST"]=> string(14) "localhost:8080"
+             */
+            
+            //setcookie($cookie_name, $cookie_value, $cookie_expire, "/" , $cookie_domain, 0);
+            setcookie("userid", $result[0]["id"], $cookie_expire, $cookie_domain);
+            setcookie("name", $result[0]["name"], $cookie_expire, $cookie_domain);
+            
+            
             header("Location: welcome.php");
+            exit;
         }else{
+            // Login failure
             header("Location: login.php");
+            exit;
         }
         
     }catch(PDOException $e){

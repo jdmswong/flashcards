@@ -12,3 +12,6 @@ to dump mysql schema:
  mysqldump.exe -h 127.0.0.1 -u root -p --no-data flashcards > mysql/dbdump.sql 
  
 Passwords are stored as sha-256 hashes
+
+Starting the php server:
+    php -S localhost:8080
