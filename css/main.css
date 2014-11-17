@@ -21,11 +21,22 @@ form > * {
 }
 
 #page-title {
+    float: left;
     font-size: 20pt;
     position: relative;
     top: 50%;
     transform: translateY(-50%);
     margin-left: 20px;
+}
+
+#user-corner {
+    float: right;
+    font-size: 16pt;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-right: 20px;
+    
 }
 
 #debug {
