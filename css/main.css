@@ -100,6 +100,26 @@ form > * {
     display: block;
 }
 
+.form-msg{
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+/*====== newuser.php ======*/
+
+#newuser-form {
+    text-align: right;
+    width: 330px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#newuser-form input[type='submit']{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
 /*====== usecards.php ======*/
 
 #title{

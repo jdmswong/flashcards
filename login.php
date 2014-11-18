@@ -9,21 +9,33 @@ if(isset($_COOKIE['name']) && isset($_COOKIE['userid'])){
 
 <head>
 
-    <title>Flashcards</title>
+    <title>Log-in</title>
     <link type="text/css" rel="stylesheet" href="css/reset.css"/>
     <link type="text/css" rel="stylesheet" href="css/main.css"/>
     <script src="js/jquery-2.0.3.js"></script>
+    <script src="js/login.js"></script>
     
 
 </head>
 <body>        
-<?php require("header.php"); ?>
+<?php require("header.php"); 
+
+if(isset($_GET['msg'])){
+    switch($_GET['msg']){
+        case "newuser":
+            ?><span class="form-msg">Your account has been added!  Please log in to continue</span><br><?php
+            break;
+    }
+}
+
+?>
 
 <div id="title">Please log in:</div>
 <form method="post" action="<?php echo basename(__FILE__); ?>">
     Username: <input type="text" id="username" name="username" /><br>
     Password: <input type="password" id="password" name="password" /><br>
     <input type="submit" value="Submit"/>
+    <input type="button" id="btn-newuser" value="New user?"/>
 </form> 
 
 <?php require("footer.php"); ?>      

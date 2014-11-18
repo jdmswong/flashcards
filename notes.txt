@@ -13,6 +13,7 @@ to dump mysql schema:
  
 Passwords are stored as sha-256 hashes
     mysql: SELECT SHA2('abc', 256);
+    php: hash("sha256", 'abc', false)
 
 Starting the php server:
     php -S localhost:8080
