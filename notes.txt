@@ -17,3 +17,26 @@ Passwords are stored as sha-256 hashes
 
 Starting the php server:
     php -S localhost:8080
+    
+Useful queries:
+    Get all users, decks, and card counts.  Showing orphaned decks and deckless users
+    OUTER JOIN must be emulated by UNIONing LEFT and RIGHT because MySQL:
+    
+        SELECT user_name, deck_name, count(*)
+        FROM (
+            SELECT users.name AS user_name,decks.name AS deck_name,decks.deckid
+            FROM users LEFT JOIN decks ON users.id=decks.userid 
+            UNION
+            SELECT users.name AS user_name,decks.name AS deck_name,decks.deckid
+            FROM users RIGHT JOIN decks ON users.id=decks.userid 
+        ) AS fulljoin
+            LEFT JOIN flashcards ON fulljoin.deckid=flashcards.deckid 
+            GROUP BY fulljoin.deckid
+    
+    Delete a user, their decks, and cards:
+    
+        DELETE users,decks,flashcards 
+        FROM users
+            JOIN decks on users.id=decks.userid
+            JOIN flashcards on decks.deckid=flashcards.deckid         
+        WHERE users.id=4

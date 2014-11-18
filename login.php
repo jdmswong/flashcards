@@ -21,11 +21,16 @@ if(isset($_COOKIE['name']) && isset($_COOKIE['userid'])){
 <?php require("header.php"); 
 
 if(isset($_GET['msg'])){
+    echo '<span class="form-msg">';
     switch($_GET['msg']){
         case "newuser":
-            ?><span class="form-msg">Your account has been added!  Please log in to continue</span><br><?php
+            echo "Your account has been added!  Please log in to continue";
+            break;
+        case "badlogin":
+            echo "Invalid username or password, please try again";
             break;
     }
+    echo '</span><br>';
 }
 
 ?>
@@ -85,7 +90,7 @@ if(isset($_GET['msg'])){
             exit;
         }else{
             // Login failure
-            header("Location: login.php");
+            header("Location: login.php?msg=badlogin");
             exit;
         }
         

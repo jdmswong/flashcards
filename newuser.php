@@ -76,9 +76,9 @@ if(isset($_GET['msg'])){
 <form method="post" id="newuser-form" action="<?php echo basename(__FILE__); ?>">
     Username:           <input type="text"      id="username"       name="username" 
         <?php echo isset($_GET['username']) ? 'value='.$_GET['username'] : ""; ?> /><br>
-    Password:           <input type="password"  id="password"       name="password" /><br>
-    Re-enter Password:  <input type="password"  id="password-clone" name="password" /><br>
-    Name:               <input type="text"      id="name"           name="name"     
+    Password:           <input type="password"  id="password"       name="password"  autocomplete="off" /><br>
+    Re-enter Password:  <input type="password"  id="password-clone" name="password"  autocomplete="off" /><br>
+    Name:               <input type="text"      id="name"           name="name" autocomplete="off"     
         <?php echo isset($_GET['name']) ? 'value='.$_GET['name']: ""; ?> /><br>
                         <input type="submit" value="Submit"/>
 </form> 
