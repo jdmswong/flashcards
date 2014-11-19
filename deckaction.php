@@ -54,7 +54,7 @@ function deleteDecks($deckids){
         
         $sql = "
             DELETE decks,flashcards 
-            FROM decks INNER JOIN flashcards ON flashcards.deckid = decks.deckid
+            FROM decks LEFT JOIN flashcards ON flashcards.deckid = decks.deckid
             WHERE userid=?
                 AND decks.deckid=? ";
         for($i=0; $i<sizeof($deckids)-1; $i++){
