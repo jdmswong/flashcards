@@ -1,4 +1,5 @@
 <?php
+error_reporting(E_ERROR | E_PARSE);
 if( 
     isset($_POST['username']) and 
     isset($_POST['password']) and 

@@ -1,4 +1,5 @@
 <?php
+error_reporting(E_ERROR | E_PARSE);
 if(isset($_COOKIE['name']) && isset($_COOKIE['userid'])){
     header("Location: welcome.php");
     exit;
