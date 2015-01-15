@@ -1,5 +1,4 @@
 <?php
-error_reporting(E_ERROR | E_PARSE);
 if(isset($_COOKIE['name']) && isset($_COOKIE['userid'])){
     header("Location: welcome.php");
     exit;
@@ -29,6 +28,9 @@ if(isset($_GET['msg'])){
             break;
         case "badlogin":
             echo "Invalid username or password, please try again";
+            break;
+        case "nocookie":
+            echo "Cannot idenfity your session, please verify that cookies are enabled and try again";
             break;
     }
     echo '</span><br>';
